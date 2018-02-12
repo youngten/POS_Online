@@ -9,10 +9,10 @@
               <el-table-column prop="count" label="數量" width="70"/>
               <el-table-column prop="price" label="金額" width="70"/>
               <el-table-column label="操作" width="100" fixed="right">
-                <template slot-scope="scope">
+                <div slot-scope="scope">
                   <el-button type="text" size="small" @click="delSingleGoods(scope.row)">刪除</el-button>
                   <el-button type="text" size="small" @click="addOrderList(scope.row)">增加</el-button>
-                </template>
+                </div>
               </el-table-column>
             </el-table>
             <div class="totaDiv">
@@ -42,6 +42,32 @@
         </div>
         <div class="goods_type">
           <el-tabs>
+            <el-tab-pane label="ALL">
+              <div>
+                <ul class='cookList'>
+                  <li v-for="g   in type0Goods" :key="g.id" @click="addOrderList(g)">
+                    <span class="foodImg"><img :src="g.goodsImg" width="100%"></span>
+                    <span class="foodName">{{ g.goodsName }}</span>
+                    <span class="foodPrice">￥{{ g.price }}元</span>
+                  </li>
+                  <li v-for="g1   in type1Goods" :key="g1.id" @click="addOrderList(g1)">
+                    <span class="foodImg"><img :src="g1.goodsImg" width="100%"></span>
+                    <span class="foodName">{{ g1.goodsName }}</span>
+                    <span class="foodPrice">￥{{ g1.price }}元</span>
+                  </li>
+                  <li v-for="g2   in type2Goods" :key="g2.id" @click="addOrderList(g2)">
+                    <span class="foodImg"><img :src="g2.goodsImg" width="100%"></span>
+                    <span class="foodName">{{ g2.goodsName }}</span>
+                    <span class="foodPrice">￥{{ g2.price }}元</span>
+                  </li>
+                  <li v-for="g3   in type3Goods" :key="g3.id" @click="addOrderList(g3)">
+                    <span class="foodImg"><img :src="g3.goodsImg" width="100%"></span>
+                    <span class="foodName">{{ g3.goodsName }}</span>
+                    <span class="foodPrice">￥{{ g3.price }}元</span>
+                  </li>
+                </ul>
+              </div>
+            </el-tab-pane>
             <el-tab-pane label="漢堡">
 
               <div>
@@ -223,6 +249,7 @@
   .pos_order {
     background-color: #F9FAFC;
     border-right: 1px solid #C0CCDA;
+    padding: 0 5px;
     .div_btn {
       margin-top: 10px;
     }
