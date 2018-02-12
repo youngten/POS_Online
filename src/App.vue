@@ -3,9 +3,9 @@
     <!--<img src="./assets/logo.png">-->
     <left-navi></left-navi>
     <div class="main">
-      <!--<keep-alive>-->
-      <router-view/>
-      <!--</keep-alive>-->
+      <keep-alive>
+        <router-view/>
+      </keep-alive>
     </div>
   </div>
 </template>
