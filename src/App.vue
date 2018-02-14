@@ -36,7 +36,7 @@
       width: 95%;
       float: right;
       background-color: #EFF2F7;
-      overflow: hidden;
+      overflow: auto;
     }
   }
 </style>

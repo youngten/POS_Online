@@ -19,7 +19,7 @@
               數量：{{ totalCount }}<i style="padding:20px;"></i>金額：{{ totalMoney }}
             </div>
             <div class="div_btn">
-              <el-button type="warning">掛單</el-button>
+              <el-button type="warning" @click="$message.info('Not yet implement')">掛單</el-button>
               <el-button type="danger" @click="delAllGoods()">刪除</el-button>
               <el-button type="success" @click="checkout()">結賬</el-button>
             </div>
@@ -69,7 +69,6 @@
               </div>
             </el-tab-pane>
             <el-tab-pane label="漢堡">
-
               <div>
                 <ul class='cookList'>
                   <li v-for="type0Good in type0Goods" :key="type0Good.id" @click="addOrderList(type0Good)">
@@ -79,10 +78,8 @@
                   </li>
                 </ul>
               </div>
-
             </el-tab-pane>
             <el-tab-pane label="小食">
-
               <div>
                 <ul class='cookList'>
                   <li v-for="type1Good in type1Goods" :key="type1Good.id" @click="addOrderList(type1Good)">
@@ -92,10 +89,8 @@
                   </li>
                 </ul>
               </div>
-
             </el-tab-pane>
             <el-tab-pane label="飲料">
-
               <div>
                 <ul class='cookList'>
                   <li v-for="type2Good in type2Goods" :key="type2Good.id" @click="addOrderList(type2Good)">
@@ -105,10 +100,8 @@
                   </li>
                 </ul>
               </div>
-
             </el-tab-pane>
             <el-tab-pane label="套餐">
-
               <div>
                 <ul class='cookList'>
                   <li v-for="type3Good in type3Goods" :key="type3Good.id" @click="addOrderList(type3Good)">
@@ -118,7 +111,6 @@
                   </li>
                 </ul>
               </div>
-
             </el-tab-pane>
           </el-tabs>
         </div>
@@ -142,13 +134,12 @@
         type3Goods: [],
         totalMoney: 0,
         totalCount: 0
-
       }
     },
     created() {
       axios.get('http://jspang.com/DemoApi/oftenGoods.php')
         .then(Response => {
-          console.log(Response);
+          // console.log(Response);
           this.oftenGoods = Response.data;
         })
         .catch(error => {
@@ -169,17 +160,8 @@
           alert('網絡錯誤!');
         })
     },
-    mounted() {
-      var allHeight = document.body.clientHeight;
-      document.getElementById('order_list').style.height = allHeight + 'px';
-      document.getElementById('bibi_list').style.height = allHeight + 'px';
-    },
     methods: {
       addOrderList(goods) {
-        //匯總數量清0
-        this.totalCount = 0;
-        this.totalMoney = 0;
-
         //商品是否已經存在於訂單列表
         let isHave = false;
         for (let i = 0; i < this.tableData.length; i++) {
@@ -197,12 +179,7 @@
           let newGoods = {goodsId: goods.goodsId, goodsName: goods.goodsName, price: goods.price, count: 1};
           this.tableData.push(newGoods);
         }
-
-        //進行數量和價格的匯總計算
-        this.tableData.forEach((element) => {
-          this.totalCount += element.count;
-          this.totalMoney = this.totalMoney + (element.price * element.count);
-        });
+        this.getAllMoney();
       },
       //刪除單個商品
       delSingleGoods(goods) {
@@ -214,6 +191,7 @@
         this.tableData = [];
         this.totalCount = 0;
         this.totalMoney = 0;
+        this.$message.warning('Empty Cart!!!');
       },
       //匯總數量和金額
       getAllMoney() {
@@ -235,11 +213,9 @@
             message: '結賬成功，感謝你又為店裡出了一份力!',
             type: 'success'
           });
-
         } else {
           this.$message.error('不能空結。老闆瞭解你急切的心情！');
         }
-
       }
     },
   }
