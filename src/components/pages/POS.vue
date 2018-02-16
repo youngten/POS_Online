@@ -9,10 +9,10 @@
               <el-table-column prop="count" label="數量" width="70"/>
               <el-table-column prop="price" label="金額" width="70"/>
               <el-table-column label="操作" width="100" fixed="right">
-                <div slot-scope="scope">
+                <template slot-scope="scope">
                   <el-button type="text" size="small" @click="delSingleGoods(scope.row)">刪除</el-button>
                   <el-button type="text" size="small" @click="addOrderList(scope.row)">增加</el-button>
-                </div>
+                </template>
               </el-table-column>
             </el-table>
             <div class="totaDiv">
